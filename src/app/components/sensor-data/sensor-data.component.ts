@@ -1,9 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { FormsModule, NgForm } from '@angular/forms';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { SensorDataModel, SensorType } from '../../models/sensor-data.model';
 import { HttpService } from '../../services/http.service';
+import { SwalService } from '../../services/swal.service';
 
 @Component({
   selector: 'app-sensor-data',
@@ -31,20 +32,38 @@ export class SensorDataComponent {
   constructor(
     private http:HttpService,
     private activated: ActivatedRoute,
+    private swal: SwalService,
+    private router: Router
   ){
     this.activated.params.subscribe((res) => {
       this.sensorDataId = res['id'];
     });
+    this.get();
   }
 
   get(){
     this.http.get(`SensorDatas/Get?Id=${this.sensorDataId}`, (res) => {
-      console.log(res.data);
+      this.sensorDataModel = res.data;
+      console.log(this.sensorDataModel);
       
     });
   }
 
+  update(form:NgForm){
+    if(form.valid){
+      this.http.post("SensorDatas/Update", this.sensorDataModel, (res) => {
+        console.log(res);
+        this.get();
+      });
+    }
+  }
+
   deleteById(){
-    
+    this.swal.callToastWithButton('Silmek istediğinize emin misiniz?', 'Evet', () => {
+      this.http.get(`SensorDatas/Delete?Id=${this.sensorDataId}`, (res) => {
+        console.log(res.data);
+        this.router.navigateByUrl("/sensors");
+      });
+    });
   }
 }
