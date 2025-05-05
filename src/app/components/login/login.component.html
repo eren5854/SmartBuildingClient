@@ -1,0 +1,180 @@
+
+<div class="authincation h-100">
+   <div class="container h-100" style="margin-top: 15vh;">
+       <div class="row justify-content-center align-items-center">
+           <div class="col-md-6">
+               <div class="authincation-content">
+                   <div class="row no-gutters">
+                       <div class="col-xl-12">
+                           <div class="auth-form">
+                      <div class="text-center mb-3">
+                         <a href="index.html"><img src="assets/img/smart-home-2.png" alt=""></a>
+                      </div>
+                               <h4 class="text-center mb-4">Sign in your account</h4>
+                               <form #loginForm="ngForm" (ngSubmit)="login(loginForm)">
+                                   <div class="mb-3">
+                                       <label class="mb-1"><strong>Email</strong></label>
+                                       <input [(ngModel)]="loginModel.emailOrUserName" type="email" id="emailOrUserName" name="emailOrUserName" required class="form-control">
+                                   </div>
+                                   <div class="mb-3">
+                                       <label class="mb-1"><strong>Password</strong></label>
+                                       <input [(ngModel)]="loginModel.password" type="password" id="password" name="password" required class="form-control">
+                                   </div>
+                                   <div class="row d-flex justify-content-between mt-4 mb-2">
+                                       <div class="mb-3">
+                                          <div class="form-check custom-checkbox ms-1">
+                                  <input type="checkbox" class="form-check-input" id="basic_checkbox_1">
+                                  <label class="form-check-label" for="basic_checkbox_1">Remember my preference</label>
+                               </div>
+                                       </div>
+                                       <div class="mb-3">
+                                           <a href="page-forgot-password.html">Forgot Password?</a>
+                                       </div>
+                                   </div>
+                                   <div class="text-center">
+                                       <button type="submit" class="btn btn-primary btn-block">Sign Me In</button>
+                                   </div>
+                               </form>
+                               <div class="new-account mt-3">
+                                   <p>Don't have an account? <a class="text-primary" routerLink="/signup">Sign up</a></p>
+                               </div>
+                           </div>
+                       </div>
+                   </div>
+               </div>
+           </div>
+       </div>
+   </div>
+</div>
+
+
+
+<!--=============== LOGIN IMAGE ===============-->
+<!-- <svg class="login__blob" viewBox="0 0 566 840" xmlns="http://www.w3.org/2000/svg">
+    <mask id="mask0" mask-type="alpha">
+       <path d="M342.407 73.6315C388.53 56.4007 394.378 17.3643 391.538 
+       0H566V840H0C14.5385 834.991 100.266 804.436 77.2046 707.263C49.6393 
+       591.11 115.306 518.927 176.468 488.873C363.385 397.026 156.98 302.824 
+       167.945 179.32C173.46 117.209 284.755 95.1699 342.407 73.6315Z"/>
+    </mask>
+ 
+    <g mask="url(#mask0)">
+       <path d="M342.407 73.6315C388.53 56.4007 394.378 17.3643 391.538 
+       0H566V840H0C14.5385 834.991 100.266 804.436 77.2046 707.263C49.6393 
+       591.11 115.306 518.927 176.468 488.873C363.385 397.026 156.98 302.824 
+       167.945 179.32C173.46 117.209 284.755 95.1699 342.407 73.6315Z"/>
+ 
+       <image class="login__img" href="assets/img/pngegg.png"/>
+    </g>
+ </svg>       -->
+
+ <!--=============== LOGIN ===============-->
+ <!-- <div class="login container grid" id="loginAccessRegister">
+    <div class="login__access">
+       <h1 class="login__title">Log in to your account.</h1>
+       
+       <div class="login__area">
+          <form #loginForm="ngForm" (ngSubmit)="login(loginForm)" class="login__form"  >
+             <div class="login__content grid">
+                <div class="login__box">
+                   <input [(ngModel)]="loginModel.emailOrUserName" type="email" id="emailOrUserName" name="emailOrUserName" required placeholder=" " class="login__input">
+                   <label for="emailOrUserName" class="login__label">Email</label>
+       
+                   <i class="ri-mail-fill login__icon"></i>
+                </div>
+    
+                <div class="login__box">
+                    <input [(ngModel)]="loginModel.password" type="password" id="password" name="password" required placeholder=" " class="login__input">
+                    <label for="password" class="login__label">Password</label>
+                    <i class="ri-eye-off-fill login__icon login__password" 
+                       id="loginPassword"
+                       (click)="togglePasswordVisibility('password', 'loginPassword')"></i>
+                  </div>
+             </div>
+    
+             <a href="#" class="login__forgot">Forgot your password?</a>
+    
+             <button type="submit" class="login__button">Login</button>
+          </form>
+ 
+          <div class="login__social">
+             <p class="login__social-title">Or login with</p>
+ 
+             <div class="login__social-links">
+                <a href="#" class="login__social-link">
+                   <img src="/assets/img/icon-google.svg" alt="image" class="login__social-img">
+                </a>
+ 
+                <a href="#" class="login__social-link">
+                   <img src="/assets/img/icon-facebook.svg" alt="image" class="login__social-img">
+                </a>
+ 
+                <a href="#" class="login__social-link">
+                   <img src="/assets/img/icon-apple.svg" alt="image" class="login__social-img">
+                </a>
+             </div>
+          </div>
+ 
+          <p class="login__switch">
+            Don't have an account? 
+            <button (click)="switchToRegister()">Create Account</button>
+          </p>
+       </div>
+    </div> -->
+
+    <!--===== LOGIN REGISTER =====-->
+    <!-- <div class="login__register">
+       <h1 class="login__title">Create new account.</h1>
+
+       <div class="login__area">
+          <form #signupForm="ngForm" (ngSubmit)="signup(signupForm)" class="login__form">
+             <div class="login__content grid">
+                <div class="login__group grid">
+                   <div class="login__box">
+                      <input [(ngModel)]="userModel.firstName" type="text" id="firstName" name="firstName" required placeholder=" " class="login__input">
+                      <label for="firstName" class="login__label">Names</label>
+ 
+                      <i class="ri-id-card-fill login__icon"></i>
+                   </div>
+ 
+                   <div class="login__box">
+                      <input [(ngModel)]="userModel.lastName" type="text" id="lastName" name="lastName" required placeholder=" " class="login__input">
+                      <label for="lastName" class="login__label">Surnames</label>
+ 
+                      <i class="ri-id-card-fill login__icon"></i>
+                   </div>
+                </div>
+
+                <div class="login__box">
+                    <input [(ngModel)]="userModel.userName" type="email" id="userName" name="userName" required placeholder=" " class="login__input">
+                    <label for="userName" class="login__label">User Name</label>
+ 
+                    <i class="ri-mail-fill login__icon"></i>
+                 </div>
+
+                <div class="login__box">
+                   <input [(ngModel)]="userModel.email" type="email" id="email" name="email" required placeholder=" " class="login__input">
+                   <label for="email" class="login__label">Email</label>
+
+                   <i class="ri-mail-fill login__icon"></i>
+                </div>
+
+                <div class="login__box">
+                    <input [(ngModel)]="userModel.password" type="password" id="password" name="password" required placeholder=" " class="login__input">
+                    <label for="password" class="login__label">Password</label>
+                    <i class="ri-eye-off-fill login__icon login__password" 
+                       id="loginPasswordCreate"
+                       (click)="togglePasswordVisibility('passwordCreate', 'loginPasswordCreate')"></i>
+                  </div>
+             </div>
+
+             <button type="submit" class="login__button">Create account</button>
+          </form>
+
+          <p class="login__switch">
+            Already have an account? 
+            <button (click)="switchToLogin()">Log In</button>
+          </p>
+       </div>
+    </div>
+ </div> -->

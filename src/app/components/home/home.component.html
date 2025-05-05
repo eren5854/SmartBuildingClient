@@ -1,0 +1,160 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/sensors">Dashboard</a></li>
+        <li class="breadcrumb-item"><a routerLink="/sensor/"></a></li>
+    </ol>
+</div>
+<div class="row">
+
+
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Işıklar ve Röleler</h3>
+                <div class="row">
+
+                    <div *ngFor="let room of rooms;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                        <div class="card overflow-hidden">
+                            <div class="social-graph-wrapper widget-facebook">
+                                <span class="s-icon">{{room.roomName}}</span>
+                            </div>
+                            <div class="row">
+                                @for (sensor of room.getAllSensor; track sensor) {
+                                    <div *ngIf="sensor.sensorType === 1 || sensor.sensorType === 2" class="col-6 border-end">
+                                        <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                            <label class="switch">
+                                                <input type="checkbox" [checked]="sensor.data1 === 1"
+                                                    (change)="onToggleSwitch(sensor, $event)">
+                                                <span class="slider round"></span>
+                                            </label>
+                                            <p class="m-0">{{ sensor.sensorName }}</p>
+                                        </div>
+                                    </div>
+                                }
+                            </div>
+                        </div>
+                    </div>
+                    <!-- <div class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                        <div class="card overflow-hidden">
+                            <div class="social-graph-wrapper widget-linkedin">
+                                <span class="s-icon"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 border-end">
+                                    <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h4 class="m-1"><span class="counter">89</span> k</h4>
+                                        <p class="m-0">Friends</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h4 class="m-1"><span class="counter">119</span> k</h4>
+                                        <p class="m-0">Followers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                        <div class="card overflow-hidden">
+                            <div class="social-graph-wrapper widget-googleplus">
+                                <span class="s-icon"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 border-end">
+                                    <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h4 class="m-1"><span class="counter">89</span> k</h4>
+                                        <p class="m-0">Friends</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h4 class="m-1"><span class="counter">119</span> k</h4>
+                                        <p class="m-0">Followers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                        <div class="card overflow-hidden">
+                            <div class="social-graph-wrapper widget-twitter">
+                                <span class="s-icon"></span>
+                            </div>
+                            <div class="row">
+                                <div class="col-6 border-end">
+                                    <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h4 class="m-1"><span class="counter">89</span> k</h4>
+                                        <p class="m-0">Friends</p>
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h4 class="m-1"><span class="counter">119</span> k</h4>
+                                        <p class="m-0">Followers</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div> -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Röleler</h3>
+                <div class="row">
+
+                    <div *ngFor="let room of rooms;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                        <div class="card overflow-hidden">
+                            <div class="social-graph-wrapper widget-facebook">
+                                <span class="s-icon">{{room.roomName}}</span>
+                            </div>
+                            <div class="row">
+                                <div *ngFor="let sensor of room.getAllSensor;" class="col-6 border-end">
+                                    <div *ngIf="sensor.sensorType === 1 || sensor.sensorType === 2" class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <label class="switch">
+                                            <input type="checkbox" [checked]="sensor.data1 === 1"
+                                                (change)="onToggleSwitch(sensor, $event)">
+                                            <span class="slider round"></span>
+                                        </label>
+                                        <p class="m-0">{{ sensor.sensorName }}</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div> -->
+
+    <div class="col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <h3>Termometreler</h3>
+                <div class="row">
+
+                    <div *ngFor="let temp of temps;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                        <div class="card overflow-hidden">
+                            <div class="social-graph-wrapper widget-twitter">
+                                <span class="s-icon">{{temp.roomInfo?.roomName}}</span>
+                            </div>
+                            <div class="row">
+                                <div class="col-12 border-end">
+                                    <div *ngIf="temp.sensorType === 3" class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                        <h2 class="m-1"><span class="counter">{{ temp.data1 }} °C</span></h2>
+                                        <p class="m-0"></p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

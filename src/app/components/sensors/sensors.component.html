@@ -1,0 +1,114 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/sensors">Cihazlar</a></li>
+        <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">Statistics</a></li> -->
+    </ol>
+</div>
+<div class="row">
+
+    <div class="card-body" style="margin-top: -30px;">
+        <button type="button" class="btn btn-warning" style="color: black;" data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter">Cihaz Ekle</button>
+        <!-- <button type="button" class="btn btn-secondary">Secondary</button>
+                <button type="button" class="btn btn-success">Success</button>
+                <button type="button" class="btn btn-danger">Danger</button>
+                <button type="button" class="btn btn-warning">Warning</button>
+                <button type="button" class="btn btn-info">Info</button>
+                <button type="button" class="btn btn-light">Light</button>
+                <button type="button" class="btn btn-dark">Dark</button> -->
+    </div>
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Cihaz Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form #deviceCreateForm="ngForm" (ngSubmit)="create(deviceCreateForm)">
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="deviceModel.deviceName" id="deviceName" name="deviceName"
+                                            required type="text" class="form-control input-default "
+                                            placeholder="Cihaz İsmi">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="deviceModel.deviceDescription" id="deviceDescription"
+                                            name="deviceDescription" required type="text"
+                                            class="form-control input-default " placeholder="Cihaz Açıklaması">
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                                <input [(ngModel)]="sensorModel.roomId" id="roomId" name="roomId"
+                                                 type="text" class="form-control input-default "
+                                                    placeholder="Oda">
+                                            </div> -->
+                                    <div class="mb-3">
+                                        <button *ngFor="let room of rooms" (click)="setRoomId(room.id!)" type="button"
+                                            class="btn me-3"
+                                            [ngClass]="{'btn-info': room.id !== selectedRoomId, 'btn-success': room.id === selectedRoomId}">
+                                            {{room.roomName}}
+                                        </button>
+                                    </div>
+                                    <div class="mb-3">
+                                        <select class="form-select" [(ngModel)]="deviceModel.deviceType" name="deviceType" required>
+                                            <option *ngFor="let type of deviceTypes" [ngValue]="type">{{ type.name }}</option>
+                                          </select>
+                                    </div>
+                                    <!-- <div class="mb-3">
+                                                 
+                                                <select  [(ngModel)]="sensorTip" id="sensorType" name="sensorType" class="default-select  form-control wide">
+                                                    <option value="" disabled selected>Tip Seçiniz</option>
+                                                    <option *ngFor="let type of sensorType; let i = index" [value]="i">{{ i }}{{ type }}</option>
+                                                    
+                                                </select>
+                                                {{sensorTip}}
+                                            </div> -->
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger light" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div *ngFor="let device of devices; let i = index" style="width: 100%; height: 100%;">
+        <h2 routerLink="/device/{{device.id}}" style="cursor: pointer;">{{device.deviceName}} <i class="fa-solid fa-arrow-right" style="color: green;"></i></h2>
+        <div style="width: 100%; height: 100%; display: flex; flex-wrap: wrap;">
+            <div *ngFor="let sensorData of device.sensorDatas; let i = index"
+                class="col-xl-3 col-xxl-6 col-lg-6 col-sm-6">
+                <div routerLink="/device/{{device.id}}" class="widget-stat card bg-dark me-2" style="cursor: pointer;">
+                    <div class="card-body  p-4">
+                        <div class="media">
+                            <span class="me-3">
+                                <i *ngIf="sensorData.sensorType?.name === 'Light'" class="fa-solid fa-lightbulb"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'Temperature'"
+                                    class="fa-solid fa-temperature-three-quarters"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'Humidity'"
+                                    class="fa-solid fa-percent"></i>
+                            </span>
+                            <div class="media-body text-white text-end">
+                                <p class="mb-1">{{sensorData.dataName}}</p>
+                                <h3 *ngIf="sensorData.sensorType?.name === 'Relay' || sensorData.sensorType?.name === 'Light'" class="text-white">{{
+                                    sensorData.value
+                                    === 1 ? 'On' : 'Off' }}</h3>
+                                <h3 *ngIf="sensorData.sensorType?.name !== 'Relay' && sensorData.sensorType?.name !== 'Light'" class="text-white">
+                                    {{sensorData.value}}</h3>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

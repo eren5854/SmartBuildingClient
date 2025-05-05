@@ -1,0 +1,40 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/remote-controls">Uzak Kontrol</a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">{{remoteControlName}}</a></li>
+    </ol>
+</div>
+
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Kumanda Tuş Kodları</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form *ngFor="let remoteControlKey of remoteControlKeys" #remoteControlKeyUpdateForm="ngForm"
+                        (ngSubmit)="update(remoteControlKeyUpdateForm, remoteControlKey)" class="needs-validation" novalidate="">
+                        <div class="row">
+                            <div class="mb-3 row">
+                                <label class="col-lg-3 col-form-label"
+                                    for="validationCustom01">{{remoteControlKey.keyName}}
+                                    <!-- <span class="text-danger">*</span> -->
+                                </label>
+                                <div class="col-lg-7">
+                                    <input [(ngModel)]="remoteControlKey.keyCode" type="text" class="form-control"
+                                        id="keyCode" name="keyCode" placeholder="Key Code..." required="">
+                                </div>
+                                <div class="col-lg-2 mt-2 row">
+                                    <div class="col-lg-8">
+                                        <button type="submit" class="btn btn-success">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

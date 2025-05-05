@@ -1,0 +1,109 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>SmartBuildingClient</title>
+  <base href="/">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="icon" type="image/x-icon" href="favicon.ico">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/remixicon/4.2.0/remixicon.css">
+
+  <link rel="shortcut icon" type="image/png" href="../assets/images/favicon.png">
+	<link href="../assets/vendor/jquery-nice-select/css/nice-select.css" rel="stylesheet">
+	<link href="../assets/vendor/owl-carousel/owl.carousel.css" rel="stylesheet">
+	<link rel="../assets/stylesheet" href="vendor/nouislider/nouislider.min.css">
+</head>
+<body>
+
+
+  <app-root></app-root>
+
+  <script src="https://kit.fontawesome.com/5ff4fe19e2.js" crossorigin="anonymous"></script>
+
+  <script src="../assets/vendor/global/global.min.js"></script>
+	<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+	<script src="../assets/vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script>
+	
+	<!-- Apex Chart -->
+	<!-- <script src="../assets/vendor/apexchart/apexchart.js"></script> -->
+	
+	<script src="../assets/vendor/chart.js/Chart.bundle.min.js"></script>
+	
+	<!-- Chart piety plugin files -->
+    <script src="../assets/vendor/peity/jquery.peity.min.js"></script>
+	<!-- Dashboard 1 -->
+	<script src="../assets/js/dashboard/dashboard-1.js"></script>
+	
+	<script src="../assets/vendor/owl-carousel/owl.carousel.js"></script>
+
+	 <!-- Chart Chartist plugin files -->
+	 <script src="../assets/vendor/chartist/js/chartist.min.js"></script>
+	 <script src="../assets/vendor/chartist-plugin-tooltips/js/chartist-plugin-tooltip.min.js"></script>
+	 <!-- <script src="vendor/jquery-nice-select/js/jquery.nice-select.min.js"></script> -->
+	 <!-- <script src="js/plugins-init/chartist-init.js"></script> -->
+	
+    <!-- Toastr -->
+    <script src="../assets/vendor/toastr/js/toastr.min.js"></script>
+
+    <!-- All init script -->
+    <script src="../assets/js/plugins-init/toastr-init.js"></script>
+
+	<script src="../assets/vendor/flot/jquery.flot.js"></script>
+    <script src="../assets/vendor/flot/jquery.flot.pie.js"></script>
+    <script src="../assets/vendor/flot/jquery.flot.resize.js"></script>
+    <script src="../assets/vendor/flot-spline/jquery.flot.spline.min.js"></script>
+    <!-- <script src="../assets/js/plugins-init/flot-init.js"></script> -->
+	
+    <script src="../assets/js/custom.min.js"></script>
+	<script src="../assets/js/dlabnav-init.js"></script>
+	<script src="../assets/js/demo.js"></script>
+    <script src="../assets/js/styleSwitcher.js"></script>
+	<script>
+		function cardsCenter()
+		{
+			
+			/*  testimonial one function by = owl.carousel.js */
+			
+	
+			
+			jQuery('.card-slider').owlCarousel({
+				loop:true,
+				margin:0,
+				nav:true,
+				//center:true,
+				slideSpeed: 3000,
+				paginationSpeed: 3000,
+				dots: true,
+				navText: ['<i class="fas fa-arrow-left"></i>', '<i class="fas fa-arrow-right"></i>'],
+				responsive:{
+					0:{
+						items:1
+					},
+					576:{
+						items:1
+					},	
+					800:{
+						items:1
+					},			
+					991:{
+						items:1
+					},
+					1200:{
+						items:1
+					},
+					1600:{
+						items:1
+					}
+				}
+			})
+		}
+		
+		jQuery(window).on('load',function(){
+			setTimeout(function(){
+				cardsCenter();
+			}, 1000); 
+		});
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,91 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/rooms">Odalar</a></li>
+        <li class="breadcrumb-item"><a routerLink="/room/{{roomId}}">{{roomModel.roomName}}</a></li>
+    </ol>
+</div>
+<div class="row">
+
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <form #roomUpdateForm="ngForm" (ngSubmit)="update(roomUpdateForm)">
+                    <div class="basic-form">
+                        <div class="mb-3">
+                            <input [(ngModel)]="roomModel.roomName" id="roomName" name="roomName" required type="text"
+                                class="form-control input-default " placeholder="Oda İsmi">
+                        </div>
+                        <div class="mb-3">
+                            <input [(ngModel)]="roomModel.roomDescription" id="roomDescription" name="roomDescription"
+                                type="text" class="form-control input-default " placeholder="Oda Açıklaması">
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-3">Kaydet</button>
+                    <button type="button" (click)="deleteById()" class="btn btn-danger light">Bu odayı sil</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="col-lg-12">
+    <div class="card">
+        <div class="card-header">
+            <h4 class="card-title">{{roomModel.roomName}} cihazları</h4>
+        </div>
+        <div class="card-body">
+            <div class="table-responsive">
+                <table class="table table-responsive-md">
+                    <thead>
+                        <tr>
+                            <!-- <th style="width:50px;">
+                                <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                    <input type="checkbox" class="form-check-input" id="checkAll" required="">
+                                    <label class="form-check-label" for="checkAll"></label>
+                                </div>
+                            </th> -->
+                            <th><strong>İsim</strong></th>
+                            <th><strong>Tip</strong></th>
+                            <th><strong>Seri Numara</strong></th>
+                            <th><strong>Durum</strong></th>
+                            <th><strong>Düzenle</strong></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let device of roomModel.devices; let i = index">
+                            <!-- <td>
+                                <div class="form-check custom-checkbox checkbox-success check-lg me-3">
+                                    <input type="checkbox" class="form-check-input" id="customCheckBox2" required="">
+                                    <label class="form-check-label" for="customCheckBox2"></label>
+                                </div>
+                            </td> -->
+                            <td>
+                                <div class="d-flex align-items-center"><span
+                                        class="w-space-no">{{device.deviceName}}</span></div>
+                            </td>
+                            <td>{{device.deviceType?.name}} </td>
+                            <td>{{device.serialNo}}</td>
+                            <td>
+                                <div *ngIf="device.status === true " class="d-flex align-items-center"><i
+                                        class="fa fa-circle text-success me-1"></i>
+                                        Healty</div>
+                                <div *ngIf="device.status === false || device.status === null " class="d-flex align-items-center"><i
+                                        class="fa fa-circle text-danger me-1"></i>
+                                        Unhealty</div>
+                            </td>
+                            <td>
+                                <div class="d-flex">
+                                    <a routerLink="/device/{{device.id}}" class="btn btn-primary shadow btn-xs sharp me-1"><i
+                                            class="fas fa-pencil-alt"></i></a>
+                                    <!-- <a  class="btn btn-danger shadow btn-xs sharp"><i
+                                            class="fa fa-trash"></i></a> -->
+                                </div>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,374 @@
+<div class="row">
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Kullanıcı Bilgileri</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #scenarioUpdateForm="ngForm" (ngSubmit)="update(scenarioUpdateForm)" class="needs-validation"
+                        novalidate="">
+                        <div class="row">
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom01">İsim
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="userModel.firstName" type="text" class="form-control"
+                                        id="firstName" name="firstName" placeholder="Lütfen adıızı giriniz..."
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a first name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom02">Soy İsim
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="userModel.lastName" type="text" class="form-control"
+                                        id="lastName" name="lastName" placeholder="Lütfen soyadınızı giriniz..."
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a last name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom02">Kullanıcı adı
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="userModel.userName" type="text" class="form-control"
+                                        id="userName" name="userName" placeholder="Lütfen kullanıcı adınızı giriniz..."
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a user name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-lg-8">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+
+                            <!-- <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom05">Best Skill
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-6">
+                                    <select class="default-select wide form-control" id="validationCustom05">
+                                        <option data-display="Select">Please select</option>
+                                        <option value="html">HTML</option>
+                                        <option value="css">CSS</option>
+                                        <option value="javascript">JavaScript</option>
+                                        <option value="angular">Angular</option>
+                                        <option value="angular">React</option>
+                                        <option value="vuejs">Vue.js</option>
+                                        <option value="ruby">Ruby</option>
+                                        <option value="php">PHP</option>
+                                        <option value="asp">ASP.NET</option>
+                                        <option value="python">Python</option>
+                                        <option value="mysql">MySQL</option>
+                                    </select>
+                                    <div class="invalid-feedback">
+                                        Please select a one.
+                                    </div>
+                                </div>
+                            </div> -->
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Şifre Değiştir</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #changePasswordForm="ngForm" (ngSubmit)="changePassword(changePasswordForm)"
+                        class="needs-validation" novalidate="">
+                        <div class="row">
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom01">Mevcut Şifre
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="changePasswordModel.currentPassword" type="password"
+                                        class="form-control" id="scenarioName" name="scenarioName" placeholder="*****"
+                                        required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a first name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <label class="col-lg-4 col-form-label" for="validationCustom02">Yeni Şifre
+                                    <span class="text-danger">*</span>
+                                </label>
+                                <div class="col-lg-8">
+                                    <input [(ngModel)]="changePasswordModel.newPassword" type="password"
+                                        class="form-control" id="scenarioDescription" name="scenarioDescription"
+                                        placeholder="*****" required="">
+                                    <div class="invalid-feedback">
+                                        Please enter a last name.
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="mb-3 row">
+                                <div class="col-lg-8">
+                                    <button type="submit" class="btn btn-primary">Submit</button>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Secret Token</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <div class="row">
+                        <div class="mb-3 row">
+                            <div class="col-lg-12 position-relative">
+                                <input [type]="showSecretKey ? 'text' : 'password'" [(ngModel)]="secretToken" readonly
+                                    id="secretKey" name="secretKey" class="form-control input-default"
+                                    placeholder="Secret Key" (click)="copyToClipboard(secretToken)">
+                                <button type="button" class="btn position-absolute end-0 top-0"
+                                    (click)="showSecretKey = !showSecretKey" style="height: 100%; color: aliceblue;">
+                                    <i [class]="showSecretKey ? 'fa fa-eye-slash' : 'fa fa-eye'"
+                                        style="color: red;"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-3 row">
+                            <div class="col-lg-8">
+                                <button (click)="generateSecretToken()" type="button"
+                                    class="btn btn-primary">Submit</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Şablon Ayarları</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #updateTemplateForm="ngForm" (ngSubmit)="updateTemplate(updateTemplateForm)"
+                        class="needs-validation" novalidate="">
+                        <div class="row">
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Version
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <nav>
+                                            <input type="checkbox" id="drop" />
+                                            <ul class="menu">
+                                                <li>
+                                                    <label for="drop-1" class="toggle"></label>
+                                                    <a>{{selectedVersion}}</a>
+                                                    <input type="checkbox" id="drop-1" />
+                                                    <ul>
+                                                        <li *ngFor="let version of versions">
+                                                            <a (click)="setVersion(version.value)">{{version.name}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Primary Color
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let color of colors">
+                                            <button (click)="setPrimaryBg(color.value)" class="btn btn-dark ms-2 mb-2"
+                                                id="header_color_1" name="header_bg" type="button"
+                                                [style.background]="color.color" style="border-radius: 3px;"></button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Navigation Header
+                                        Background
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let color of colors">
+                                            <button (click)="setNavHeaderBg(color.value)" class="btn btn-dark ms-2 mb-2"
+                                                id="header_color_1" name="header_bg" type="button"
+                                                [style.background]="color.color" style="border-radius: 3px;"></button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Header Background
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let color of colors">
+                                            <button (click)="setHeaderBg(color.value)" class="btn btn-dark ms-2 mb-2"
+                                                id="header_color_1" name="header_bg" type="button"
+                                                [style.background]="color.color" style="border-radius: 3px;"></button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Sidebar
+                                        Background
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let color of colors">
+                                            <button (click)="setHeaderBg(color.value)" class="btn btn-dark ms-2 mb-2"
+                                                id="header_color_1" name="header_bg" type="button"
+                                                [style.background]="color.color" style="border-radius: 3px;"></button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Layout
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let layout of layouts">
+                                            <button (click)="setLayout(layout.value)" class="btn ms-2 mb-2"
+                                                id="header_color_1" name="header_bg" type="button"
+                                                style="border-radius: 3px;"
+                                                [ngClass]="{'btn-dark': layout.value !== selectedLayout, 'btn-success':layout.value === selectedLayout}">{{layout.name}}</button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Header Position
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let headerPosition of headerPositions">
+                                            <button (click)="setHeaderPosition(headerPosition.value)"
+                                                class="btn ms-2 mb-2" id="header_color_1" name="header_bg" type="button"
+                                                style="border-radius: 3px;"
+                                                [ngClass]="{'btn-dark': headerPosition.value !== selectedHeaderPosition, 'btn-success':headerPosition.value === selectedHeaderPosition}">{{headerPosition.name}}</button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Sidebar Style
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <nav>
+                                            <input type="checkbox" id="drop" />
+                                            <ul class="menu">
+                                                <li>
+                                                    <label for="drop-1" class="toggle"></label>
+                                                    <a>{{selectedSidebarStyle}}</a>
+                                                    <input type="checkbox" id="drop-1" />
+                                                    <ul>
+                                                        <li *ngFor="let sidebarStyle of sidebarStyles">
+                                                            <a
+                                                                (click)="setSidebarStyle(sidebarStyle.value)">{{sidebarStyle.name}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Sidebar Position
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let sidebarPosition of sidebarPositions">
+                                            <button (click)="setSidebarPosition(sidebarPosition.value)"
+                                                class="btn ms-2 mb-2" id="header_color_1" name="header_bg" type="button"
+                                                style="border-radius: 3px;"
+                                                [ngClass]="{'btn-dark': sidebarPosition.value !== selectedSidebarPosition, 'btn-success':sidebarPosition.value === selectedSidebarPosition}">{{sidebarPosition.name}}</button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-xl-4">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Container Layout
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <span *ngFor="let containerLayout of containerLayouts">
+                                            <button (click)="setContainerLayout(containerLayout.value)"
+                                                class="btn ms-2 mb-2" id="header_color_1" name="header_bg" type="button"
+                                                style="border-radius: 3px;"
+                                                [ngClass]="{'btn-dark': containerLayout.value !== selectedContainerLayout, 'btn-success':containerLayout.value === selectedContainerLayout}">{{containerLayout.value}}</button>
+                                            <label for="header_color_1" class="bg-label-pattern"></label>
+                                        </span>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Typography
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-8">
+                                        <nav>
+                                            <input type="checkbox" id="drop" />
+                                            <ul class="menu">
+                                                <li>
+                                                    <label for="drop-1" class="toggle"></label>
+                                                    <a>{{selectedTypography}}</a>
+                                                    <input type="checkbox" id="drop-1" />
+                                                    <ul>
+                                                        <li *ngFor="let typography of typographies">
+                                                            <a
+                                                                (click)="setTypography(typography.value)">{{typography.name}}</a>
+                                                        </li>
+                                                    </ul>
+                                                </li>
+                                            </ul>
+                                        </nav>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <div class="col-lg-8">
+                                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                                        <button (click)="updateDefaultTemplate()" type="button" class="btn btn-primary">Default</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

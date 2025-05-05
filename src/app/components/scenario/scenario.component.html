@@ -1,0 +1,187 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/scenarios">Senaryolar</a></li>
+        <li class="breadcrumb-item"><a href="javascript:void(0)">{{scenarioModel.scenarioName}}</a></li>
+    </ol>
+</div>
+
+<div class="row">
+
+    <div class="col-lg-12">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Senaryo Oluştur</h4>
+            </div>
+            <div class="card-body">
+                <div class="form-validation">
+                    <form #scenarioUpdateForm="ngForm" (ngSubmit)="update(scenarioUpdateForm)" class="needs-validation" novalidate="">
+                        <div class="row">
+
+                            <div class="col-xl-6">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom01">Senaryo İsmi
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="updateScenarioModel.scenarioName" type="text" class="form-control"
+                                            id="scenarioName" name="scenarioName" placeholder="Senaryo ismi..."
+                                            required="">
+                                        <div class="invalid-feedback">
+                                            Please enter a username.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Senaryo Açıklaması
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="updateScenarioModel.scenarioDescription" type="text"
+                                            class="form-control" id="scenarioDescription" name="scenarioDescription"
+                                            placeholder="Senaryo açıklaması..." required="">
+                                        <div class="invalid-feedback">
+                                            Please enter a Email.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Tetikleme Türü
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="card-body">
+                                            <div class="btn-group me-2 mb-2 btn-group-sm">
+                                                <button *ngFor="let type of triggerTypes;"
+                                                    (click)="setTriggerType(type.id)" type="button"
+                                                    [ngClass]="{'btn-dark': type.id !== selectedTriggerType, 'btn-success': type.id === selectedTriggerType}"
+                                                    class="btn">{{type.name}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedTriggerType === 0" class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Tetikleme Saati<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="updateScenarioModel.triggerTime" type="time"
+                                            class="form-control" id="triggerTime" name="triggerTime"
+                                            placeholder="Tetikleme saati">
+                                        <div class="invalid-feedback">
+                                            Lütfen saati giriniz
+                                        </div>
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedTriggerType === 1" class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Tetikleme Sensörü<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <button *ngFor="let sensor of allSensors" (click)="setTriggerSensorId(sensor.id!)" type="button"
+                                        [ngClass]="{'btn-dark': sensor.id !== selectedTriggerSensorId, 'btn-success': sensor.id === selectedTriggerSensorId}" class="btn mt-2 me-2" type="button" style="max-width: 150px; max-height: 50px; font-size: 12px;">{{sensor.sensorName}}</button>
+                                        <!-- <input [(ngModel)]="scenarioModel.triggerSensorId" type="text"
+                                            class="form-control" id="scenarioDescription" name="scenarioDescription"
+                                            placeholder="Your valid email.." required="">
+                                        <div class="invalid-feedback">
+                                            Lütfen saati giriniz
+                                        </div> -->
+                                    </div>
+                                </div>
+                                <div *ngIf="selectedTriggerType === 1" class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom04">Sensör Değeri<span
+                                            class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="updateScenarioModel.triggerValue" type="number"
+                                            class="form-control" id="triggerValue" name="triggerValue"
+                                            placeholder="Your valid email..">
+                                        <div class="invalid-feedback">
+                                            Lütfen saati giriniz
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="col-xl-6">
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Aksiyon Sensörü
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <button *ngFor="let sensor of actionSensors" (click)="setActionSensorId(sensor.id!)" type="button"
+                                        [ngClass]="{'btn-dark': sensor.id !== selectedActionSensorId, 'btn-success': sensor.id === selectedActionSensorId}" class="btn mt-2 me-2" type="button" style="max-width: 150px; max-height: 50px; font-size: 12px;">{{sensor.sensorName}}</button>
+                                        <!-- <input [(ngModel)]="scenarioModel.actionSensorId" type="text"
+                                            class="form-control" id="scenarioDescription" name="scenarioDescription"
+                                            placeholder="Your valid email.." required=""> -->
+                                        <div class="invalid-feedback">
+                                            Please enter a Email.
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom03">Aksiyon Türü
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <div class="card-body">
+                                            <div class="btn-group me-2 mb-2 btn-group-sm">
+                                                <button *ngFor="let type of actionTypes;"
+                                                    (click)="setActionType(type.id)" type="button"
+                                                    [ngClass]="{'btn-dark': type.id !== selectedActionType, 'btn-success': type.id === selectedActionType}"
+                                                    class="btn">{{type.name}}</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom02">Aksiyon Değeri
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <input [(ngModel)]="updateScenarioModel.actionValue" type="number"
+                                            class="form-control" id="actionValue" name="actionValue"
+                                            placeholder="Aksiyon değeri giriniz...">
+                                        <div class="invalid-feedback">
+                                            Please enter a Email.
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- <div class="mb-3 row">
+                                    <label class="col-lg-4 col-form-label" for="validationCustom05">Best Skill
+                                        <span class="text-danger">*</span>
+                                    </label>
+                                    <div class="col-lg-6">
+                                        <select class="default-select wide form-control" id="validationCustom05">
+                                            <option data-display="Select">Please select</option>
+                                            <option value="html">HTML</option>
+                                            <option value="css">CSS</option>
+                                            <option value="javascript">JavaScript</option>
+                                            <option value="angular">Angular</option>
+                                            <option value="angular">React</option>
+                                            <option value="vuejs">Vue.js</option>
+                                            <option value="ruby">Ruby</option>
+                                            <option value="php">PHP</option>
+                                            <option value="asp">ASP.NET</option>
+                                            <option value="python">Python</option>
+                                            <option value="mysql">MySQL</option>
+                                        </select>
+                                        <div class="invalid-feedback">
+                                            Please select a one.
+                                        </div>
+                                    </div>
+                                </div> -->
+                                <div class="mb-3 row">
+                                    <div class="col-lg-8 ms-auto">
+                                        <button type="submit" class="btn btn-primary">Submit</button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,176 @@
+<div class="row page-titles">
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item active"><a routerLink="/rooms">Uzak Kontrol</a></li>
+        <!-- <li class="breadcrumb-item"><a href="javascript:void(0)">Statistics</a></li> -->
+    </ol>
+</div>
+
+<!-- row -->
+<div class="row">
+
+    <div class="card-body" style="margin-top: -30px;">
+        <button type="button" class="btn btn-success" data-bs-toggle="modal"
+            data-bs-target="#exampleModalCenter">Kumanda
+            Ekle</button>
+        <!-- <button type="button" class="btn btn-secondary">Secondary</button>
+                <button type="button" class="btn btn-success">Success</button>
+                <button type="button" class="btn btn-danger">Danger</button>
+                <button type="button" class="btn btn-warning">Warning</button>
+                <button type="button" class="btn btn-info">Info</button>
+                <button type="button" class="btn btn-light">Light</button>
+                <button type="button" class="btn btn-dark">Dark</button> -->
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="exampleModalCenter">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kumanda Ekle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form #remoteControlCreateForm="ngForm" (ngSubmit)="create(remoteControlCreateForm)">
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="name" id="name" name="name" required type="text"
+                                            class="form-control input-default " placeholder="Kumanda İsmi">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="description" id="description" name="description" type="text"
+                                            class="form-control input-default " placeholder="Kumanda Açıklaması">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button class="btn btn-danger light" data-bs-dismiss="modal">Kapat</button>
+                        <button type="submit" class="btn btn-primary">Ekle</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="updateRemoteControlModal">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title">Kumanda Düzenle</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal">
+                    </button>
+                </div>
+                <form #remoteControlUpdateForm="ngForm" (ngSubmit)="update(remoteControlUpdateForm)">
+                    <div>
+                        <div class="card">
+                            <div class="card-body">
+                                <div class="basic-form">
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="name" id="name" name="name" required type="text"
+                                            class="form-control input-default " placeholder="Kumanda İsmi">
+                                    </div>
+                                    <div class="mb-3">
+                                        <input [(ngModel)]="description" id="description" name="description" type="text"
+                                            class="form-control input-default " placeholder="Kumanda Açıklaması">
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <!-- <button class="btn btn-danger light" data-bs-dismiss="modal">Close</button> -->
+                        <button type="button" (click)="deleteById()" class="btn btn-danger light">Sil</button>
+                        <button data-bs-dismiss="modal" routerLink="/remote-control/{{setRemoteControlId}}" type="button" class="btn btn-primary">Tuş Düzeni</button>
+                        <button type="submit" class="btn btn-primary">Kaydet</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <div *ngFor="let remoteControl of remoteControls" class="col-lg-6">
+        <div>
+            <div class="container">
+                <div class="d-flex flex-row justify-content-between px-3 py-4 align-items-center">
+                    <i class="fas fa-chevron-left"></i>
+                    <span>{{remoteControl.name}}</span>
+                    <button (click)="setRemoteControlId = remoteControl.id" type="button" data-bs-toggle="modal"
+                    data-bs-target="#updateRemoteControlModal" style="border: none; background: transparent;"><i  class="fas fa-ellipsis-h"></i></button>
+                </div>
+
+                <div class="d-flex flex-row justify-content-center">
+                    <div class="menu-grid">
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[0].id!, remoteControl.remoteControlKeys[0].keyName, remoteControl.remoteControlKeys[0].keyCode!)" class="d-flex flex-column align-items-center cursor">
+                            <i class="fas fa-power-off active"></i>
+                            <span class="label">{{remoteControl.remoteControlKeys[0].keyName}}</span>
+                        </div>
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[1].id!, remoteControl.remoteControlKeys[1].keyName, remoteControl.remoteControlKeys[1].keyCode!)" class="d-flex flex-column align-items-center cursor">
+                            <i class="fas fa-sign-in-alt"></i>
+                            <span class="label">{{remoteControl.remoteControlKeys[1].keyName}}</span>
+                        </div>
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[2].id!, remoteControl.remoteControlKeys[2].keyName, remoteControl.remoteControlKeys[2].keyCode!)" class="d-flex flex-column align-items-center cursor">
+                            <i class="fas fa-cog"></i>
+                            <span class="label">{{remoteControl.remoteControlKeys[2].keyName}}</span>
+                        </div>
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[3].id!, remoteControl.remoteControlKeys[3].keyName, remoteControl.remoteControlKeys[3].keyCode!)" class="d-flex flex-column align-items-center cursor">
+                            <i class="fas fa-bars"></i>
+                            <span class="label">{{remoteControl.remoteControlKeys[3].keyName}}</span>
+                        </div>
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[4].id!, remoteControl.remoteControlKeys[4].keyName, remoteControl.remoteControlKeys[4].keyCode!)" class="d-flex flex-column align-items-center cursor">
+                            <i class="fas fa-circle"></i>
+                            <span class="label">{{remoteControl.remoteControlKeys[4].keyName}}</span>
+                        </div>
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[5].id!, remoteControl.remoteControlKeys[5].keyName, remoteControl.remoteControlKeys[5].keyCode!)" class="d-flex flex-column align-items-center cursor">
+                            <i class="fas fa-arrow-left"></i>
+                            <span class="label">{{remoteControl.remoteControlKeys[5].keyName}}</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="d-flex flex-row mt-4 justify-content-between px-2">
+                    <div class="d-flex flex-column rounded-bg py-3 px-1 justify-content-center align-items-center">
+                        <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[6].id!, remoteControl.remoteControlKeys[6].keyName, remoteControl.remoteControlKeys[6].keyCode!)" class="fas fa-chevron-up py-3 control-icon cursor"></i>
+                        <span class="label py-3">Channel</span>
+                        <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[7].id!, remoteControl.remoteControlKeys[7].keyName, remoteControl.remoteControlKeys[7].keyCode!)" class="fas fa-chevron-down py-3 control-icon cursor"></i>
+                    </div>
+                    <div class="d-flex flex-column align-items-center">
+                        <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[8].id!, remoteControl.remoteControlKeys[8].keyName, remoteControl.remoteControlKeys[8].keyCode!)" class="d-flex flex-row grey-bg justify-content-center align-items-center cursor">
+                            <i class="fas fa-home p-3 home-icon "></i>
+                        </div>
+                        <span class="label">{{remoteControl.remoteControlKeys[8].keyName}}</span>
+                    </div>
+                    <div class="d-flex flex-column rounded-bg py-3 px-1 justify-content-center align-items-center">
+                        <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[9].id!, remoteControl.remoteControlKeys[9].keyName, remoteControl.remoteControlKeys[9].keyCode!)" class="fas fa-plus py-3 control-icon cursor"></i>
+                        <span class="label py-3">Volume</span>
+                        <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[10].id!, remoteControl.remoteControlKeys[10].keyName, remoteControl.remoteControlKeys[10].keyCode!)" class="fas fa-minus py-3 control-icon cursor"></i>
+                    </div>
+                </div>
+
+                <div class="mt-5 pt-4 position-relative d-flex flex-row justify-content-center align-items-center">
+                    <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[13].id!, remoteControl.remoteControlKeys[13].keyName, remoteControl.remoteControlKeys[13].keyCode!)" class="circle ok-inner position-absolute cursor">
+                        <span>{{remoteControl.remoteControlKeys[13].keyName}}</span>
+                    </div>
+                    <div class="circle ok-outer position-absolute"></div>
+                    <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[14].id!, remoteControl.remoteControlKeys[14].keyName, remoteControl.remoteControlKeys[14].keyCode!)" class="fas fa-caret-right position-absolute control-icon right cursor"></i>
+                    <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[15].id!, remoteControl.remoteControlKeys[15].keyName, remoteControl.remoteControlKeys[15].keyCode!)" class="fas fa-caret-right position-absolute control-icon bottom cursor"></i>
+                    <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[12].id!, remoteControl.remoteControlKeys[12].keyName, remoteControl.remoteControlKeys[12].keyCode!)" class="fas fa-caret-right position-absolute control-icon left cursor"></i>
+                    <i (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[11].id!, remoteControl.remoteControlKeys[11].keyName, remoteControl.remoteControlKeys[11].keyCode!)" class="fas fa-caret-right position-absolute control-icon top cursor"></i>
+                </div>
+
+                <div class="d-flex flex-row justify-content-between mt-5 pt-4 px-3">
+                    <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[16].id!, remoteControl.remoteControlKeys[16].keyName, remoteControl.remoteControlKeys[16].keyCode!)" class="d-flex flex-row grey-bg cursor">
+                        <i class="fas fa-ellipsis-h p-3 control-icon"></i>
+                    </div>
+                    <div (click)="updateRemoteControlKey(remoteControl.remoteControlKeys[17].id!, remoteControl.remoteControlKeys[17].keyName, remoteControl.remoteControlKeys[17].keyCode!)" class="d-flex flex-row grey-bg cursor">
+                        <i class="fas fa-volume-mute p-3 control-icon"></i>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

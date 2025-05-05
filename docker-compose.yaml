@@ -1,0 +1,11 @@
+services:
+
+
+  api:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    image: smart-home-client
+    container_name: SmartHomeClient
+    ports:
+      - 54015:80
