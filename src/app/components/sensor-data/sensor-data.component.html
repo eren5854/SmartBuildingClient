@@ -1,1 +1,149 @@
-<p>sensor-data works!</p>
+<div class="row">
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+                <form #sensorUpdateForm="ngForm" (ngSubmit)="update(sensorUpdateForm)">
+                    <div class="basic-form">
+                        <div class="mb-3">
+                            <input [(ngModel)]="sensorDataModel.dataName" id="dataName" name="dataName" required
+                                type="text" class="form-control input-default " placeholder="Sensör İsmi">
+                        </div>
+                        <div class="mb-3">
+                            <input [(ngModel)]="sensorDataModel.pinNumber" id="pinNumber"
+                                name="pinNumber" type="number" class="form-control input-default "
+                                placeholder="Sensör pin numarası">
+                        </div>
+                        <div class="mb-3">
+                            <select class="form-select" style="background-color: #262626; color: #fff;"
+                                [(ngModel)]="sensorDataModel.sensorType" name="deviceType" required>
+                                <option [value]="sensorDataModel.sensorType?.value">{{sensorDataModel.sensorType?.name}}
+                                </option>
+                                <option *ngFor="let type of sensorTypes" [ngValue]="type">{{ type.name }}</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary me-3">Kaydet</button>
+                    <button type="button" (click)="deleteById()" class="btn btn-danger light">Bu cihazı sil</button>
+                </form>
+
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-body">
+
+                <div class="basic-form">
+                    <div class="mb-3">
+                        <input readonly [(ngModel)]="deviceModel.serialNo" id="serialNo" name="serialNo" required
+                            type="text" class="form-control input-default " placeholder="Seri Numara">
+                    </div>
+                    <div class="mb-3">
+                        <input readonly [(ngModel)]="deviceModel.status" id="status" name="status" type="text"
+                            class="form-control input-default " placeholder="Durum">
+                    </div>
+                    <div class="mb-3">
+                        <input readonly [value]="deviceModel.createdAt | date:'dd/MM/yyyy'" id="createdDate"
+                            name="createdDate" type="text" class="form-control input-default"
+                            placeholder="Oluşturma tarihi">
+                    </div>
+                    <div class="mb-3 position-relative">
+                        <input [type]="showSecretKey ? 'text' : 'password'" [(ngModel)]="deviceModel.secretKey" readonly
+                            id="secretKey" name="secretKey" class="form-control input-default" placeholder="Secret Key"
+                            (click)="copyToClipboard(deviceModel.secretKey!)">
+                        <button type="button" class="btn position-absolute end-0 top-0"
+                            (click)="showSecretKey = !showSecretKey" style="height: 100%; color: aliceblue;">
+                            <i [class]="showSecretKey ? 'fa fa-eye-slash' : 'fa fa-eye'" style="color: red;"></i>
+                        </button>
+                    </div>
+                    <button (click)="generateSecretKey()" type="button" class="btn btn-primary me-3">Secret Key
+                        oluştur</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Sensörler
+                </h4>
+                <button type="button" class="btn btn-warning"
+                    style="font-size: 18px; color: green; max-width: 60px; max-height: 60px;" data-bs-toggle="modal"
+                    data-bs-target="#exampleModalCenter">+</button>
+            </div>
+            <div class="card-body">
+                <table class="table">
+                    <thead class="thead-dark">
+                        <tr>
+                            <th scope="col">İsim</th>
+                            <th scope="col">Pin No</th>
+                            <th scope="col">Tip</th>
+                            <th scope="col">Değer</th>
+                            <th scope="col"></th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr *ngFor="let sensorData of deviceModel.sensorDatas">
+                            <th scope="row">{{sensorData.dataName}}</th>
+                            <td>{{sensorData.pinNumber}}</td>
+                            <td>{{sensorData.sensorType?.name}}</td>
+                            <td>{{sensorData.value}}</td>
+                            <td>
+                                <button routerLink="/sensor-data/{{sensorData.id}}" class="btn"><i style="color: green;"
+                                        class="fa fa-edit"></i></button>
+                            </td>
+                        </tr>
+                        <!-- <tr>
+                        <th scope="row">2</th>
+                        <td>Jacob</td>
+                        <td>Thornton</td>
+                        <td>fat</td>
+                      </tr>
+                      <tr>
+                        <th scope="row">3</th>
+                        <td>Larry</td>
+                        <td>the Bird</td>
+                        <td>twitter</td>
+                      </tr> -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Günlük Kullanım</h4>
+            </div>
+            <div class="card-body">
+                <div id="flotBar2" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-6 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Haftalık Kullanım(Dakika)</h4>
+            </div>
+            <div class="card-body">
+                <div id="flotBar1" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+
+    <div *ngIf="sensorModel.sensorType === 1" class="col-lg-6 col-sm-6">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title"></h4>
+            </div>
+            <div class="card-body">
+                <div id="flotLine1" class="flot-chart"></div>
+            </div>
+        </div>
+    </div>
+
+</div>

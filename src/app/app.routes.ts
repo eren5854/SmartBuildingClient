@@ -51,7 +51,7 @@ export const routes: Routes = [
                 component: SensorComponent
             },
             {
-                path: "sensor/:id",
+                path: "sensor-data/:id",
                 component: SensorDataComponent
             },
             {
