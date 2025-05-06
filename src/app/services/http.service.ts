@@ -8,7 +8,7 @@ import { SwalService } from './swal.service';
 })
 export class HttpService {
   // imageUrl:string = "https://localhost:7023/Images/";
-  // url:string = "https://localhost:7023/api/"
+  // url:string = "https://localhost:7232/api/"
   url:string = "https://192.168.68.134:45455/api/";
   // url:string = "https://smartbuildapi.erendelibas.xyz/api/"
    constructor(

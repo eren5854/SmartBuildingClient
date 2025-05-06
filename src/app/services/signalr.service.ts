@@ -11,7 +11,10 @@ export class SignalrService {
 
   startConnection(callback: () => void) {
     this.hub = new signalR.HubConnectionBuilder()
-      .withUrl('https://192.168.68.134:45455/sensor-hub')
+      .withUrl('https://localhost:7232/sensor-hub', {
+        withCredentials: true
+      })
+      .withAutomaticReconnect()
       .build();
 
     this.hub
