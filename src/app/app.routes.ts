@@ -15,6 +15,7 @@ import { ScenarioComponent } from './components/scenario/scenario.component';
 import { RemoteControlsComponent } from './components/remote-controls/remote-controls.component';
 import { RemoteControlComponent } from './components/remote-control/remote-control.component';
 import { SensorDataComponent } from './components/sensor-data/sensor-data.component';
+import { ChartsComponent } from './components/charts/charts.component';
 
 export const routes: Routes = [
     {
@@ -69,6 +70,10 @@ export const routes: Routes = [
             {
                 path: "remote-control/:id",
                 component: RemoteControlComponent
+            },
+            {
+                path: "charts",
+                component: ChartsComponent
             },
             {
                 path: "settings",

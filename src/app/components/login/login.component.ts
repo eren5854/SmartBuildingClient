@@ -18,10 +18,8 @@ export class LoginComponent {
   loginModel: LoginModel = new LoginModel();
   userModel: UserModel = new UserModel();
 
-  // url:string = "https://smartbuildapi.erendelibas.xyz/api";
-  url:string = "https://192.168.68.134:45455/api";
-
-  // url:string = "https://192.168.68.112:45455/api/Auth/Login"
+  url:string = "https://apismartbuilding.erendelibas.xyz/api";
+  // url:string = "https://192.168.68.134:45455/api";
 
   constructor(
     private http: HttpClient,

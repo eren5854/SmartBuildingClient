@@ -51,6 +51,39 @@
     <div class="col-xl-12 col-lg-6 mb-3">
         <div class="card">
             <div class="card-header">
+                <h4 class="card-title">{{sensorDataModel.dataName}} grafiği</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="MyChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Günlük {{sensorDataModel.dataName}} grafiği</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="MyDayChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Haftalık {{sensorDataModel.dataName}} grafiği</h4>
+            </div>
+            <div class="card-body">
+                <canvas id="MyWeekChart"></canvas>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
                 <h4 class="card-title">Sensör kaydı</h4>
             </div>
             <div class="card-body">
@@ -60,18 +93,13 @@
                             <th scope="col">Değer1</th>
                             <th scope="col">Değer2</th>
                             <th scope="col">Tarih</th>
-                            <th scope="col"></th>
                         </tr>
                     </thead>
                     <tbody>
-                        <tr *ngFor="let log of sensorDataModel.sensorDataHistories">
-                            <th scope="row">{{log.value}}</th>
+                        <tr *ngFor="let log of sensorDataModelSort.sensorDataHistories">
+                            <th scope="row">{{log.value?.toFixed(2)}}</th>
                             <td>{{log.value2}}</td>
-                            <td>{{log.createdAt | date: "dd/MM/yyyy - HH:mm"}}</td>
-                            <!-- <td>
-                                <button routerLink="/sensor-data/{{sensorData.id}}" class="btn"><i style="color: green;"
-                                        class="fa fa-edit"></i></button>
-                            </td> -->
+                            <td>{{log.createdAt | date: "dd/MM/yyyy - HH:mm:ss"}}</td>
                         </tr>
                     </tbody>
                 </table>

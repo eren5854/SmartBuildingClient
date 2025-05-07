@@ -1,13 +1,11 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { RouterLink } from '@angular/router';
 import { HttpService } from '../../services/http.service';
 import { AuthService } from '../../services/auth.service';
-import { SensorModel } from '../../models/sensor.model';
 import { RoomModel } from '../../models/room.model';
 import { SensorDataModel } from '../../models/sensor-data.model';
-import * as signalR from '@microsoft/signalr';
 import { SignalrService } from '../../services/signalr.service';
 import { ChangeDetectorRef } from '@angular/core';
 
@@ -19,14 +17,15 @@ import { ChangeDetectorRef } from '@angular/core';
   styleUrl: './home.component.css'
 })
 export class HomeComponent {
-  sensors: SensorModel[] = [];
   temps: SensorDataModel[] = [];
+  hums: SensorDataModel[] = [];
   lights: SensorDataModel[] = [];
   relays: SensorDataModel[] = [];
   rooms: RoomModel[] = [];
+  lightRooms: RoomModel[] = [];
+  tempRooms: RoomModel[] = [];
   sensorDataModel: SensorDataModel = new SensorDataModel();
 
-  hub: signalR.HubConnection | undefined;
   constructor(
     private http: HttpService,
     public auth: AuthService,
@@ -51,6 +50,17 @@ export class HomeComponent {
         this.cdr.detectChanges();
       });
 
+      this.signalR.on('Hum', (res) => {
+        const existingSensorIndex = this.hums.findIndex(hum => hum.id === res.data.id);        
+        
+        if (existingSensorIndex !== -1) {
+          this.hums[existingSensorIndex].value = res.data.value;
+
+        } 
+  
+        console.log(this.hums);
+      });
+
       this.signalR.on('Temp', (res) => {
         const existingSensorIndex = this.temps.findIndex(temp => temp.id === res.data.id);        
         
@@ -73,6 +83,11 @@ export class HomeComponent {
         console.log(this.lights);
       });
     });
+  }
+
+  getHums(hums: SensorDataModel[]) {
+    hums = hums.filter(sensor => sensor.sensorType?.value === 4);
+    this.hums = hums;
   }
 
   getTemps(temps: SensorDataModel[]) {
@@ -100,9 +115,26 @@ export class HomeComponent {
         .flatMap(room => room.devices || [])
         .flatMap(device => device.sensorDatas || []);
   
+      this.getHums(allSensorDatas);
       this.getTemps(allSensorDatas);
       this.getLights(allSensorDatas);
       this.getRelays(allSensorDatas);
+
+      this.lightRooms = this.rooms.filter(room =>
+        room.devices?.some(device =>
+          device.sensorDatas?.some(sensor =>
+            sensor.sensorType?.value === 1 || sensor.sensorType?.value === 2
+          )
+        )
+      );
+
+      this.tempRooms = this.rooms.filter(room =>
+        room.devices?.some(device =>
+          device.sensorDatas?.some(sensor =>
+            sensor.sensorType?.value === 3 || sensor.sensorType?.value === 4
+          )
+        )
+      );
     });
   }
 
@@ -114,7 +146,6 @@ export class HomeComponent {
 
   updateSensorData(sensor: SensorDataModel) {
     this.http.post("SensorDatas/Update", sensor, (res) => {
-      console.log('Sensör durumu güncellendi:', res.data);
     });
   }
 }

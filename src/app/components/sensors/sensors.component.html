@@ -102,7 +102,7 @@
                                     sensorData.value
                                     === 1 ? 'On' : 'Off' }}</h3>
                                 <h3 *ngIf="sensorData.sensorType?.name !== 'Relay' && sensorData.sensorType?.name !== 'Light'" class="text-white">
-                                    {{sensorData.value}}</h3>
+                                    {{sensorData.value?.toFixed(2)}}</h3>
 
                             </div>
                         </div>

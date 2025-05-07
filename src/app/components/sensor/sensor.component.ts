@@ -27,7 +27,6 @@ export class SensorComponent implements AfterViewInit {
   sensorDataModel: SensorDataModel = new SensorDataModel();
   updateSensorDataModel: SensorDataModel = new SensorDataModel();
 
-  sensorModel: SensorModel = new SensorModel();
   roomId: string = "";
   rooms: RoomModel[] = [];
   lightTimeLogs: LightTimeLogModel[] = [];
@@ -35,27 +34,27 @@ export class SensorComponent implements AfterViewInit {
   total?: number;
   data: any;
 
-  sensorTypes:SensorType[] = [
-    {name: "Other", value: 0},
-    {name: "Light", value: 1},
-    {name: "Relay", value: 2},
-    {name: "Temperature", value: 3},
-    {name: "Ldr", value: 4},
-    {name: "Water", value: 5},
-    {name: "Pressure", value: 6},
-    {name: "Motion", value: 7},
-    {name: "Speed", value: 8},
+  sensorTypes: SensorType[] = [
+    { name: "Other", value: 0 },
+    { name: "Light", value: 1 },
+    { name: "Relay", value: 2 },
+    { name: "Temperature", value: 3 },
+    { name: "Humidity", value: 4 },
+    { name: "LDR", value: 5 },
+    { name: "Pressure", value: 6 },
+    { name: "Motion", value: 7 },
+    { name: "Speed", value: 8 },
   ];
 
   deviceTypes: DeviceType[] = [
-      { name: "Other", value: 0 },
-      { name: "Esp32", value: 1 },
-      { name: "Esp01", value: 2 },
-      { name: "Nodemcu", value: 3 },
-      { name: "RaspberryPi", value: 4 },
-      { name: "Arduino", value: 5 }
-    ];
-  
+    { name: "Other", value: 0 },
+    { name: "Esp32", value: 1 },
+    { name: "Esp01", value: 2 },
+    { name: "Nodemcu", value: 3 },
+    { name: "RaspberryPi", value: 4 },
+    { name: "Arduino", value: 5 }
+  ];
+
 
   constructor(
     private http: HttpService,
@@ -70,9 +69,6 @@ export class SensorComponent implements AfterViewInit {
     });
     this.get();
     this.getRoom();
-    // this.lightTimeLogTotal();
-    // this.getLightTimeLogDaily();
-    // this.getLightTimeLogWeekly();
   }
 
   showSecretKey = false;
@@ -99,7 +95,7 @@ export class SensorComponent implements AfterViewInit {
     }
   }
 
-  createSensor(form:NgForm){
+  createSensor(form: NgForm) {
     this.sensorDataModel.deviceId = this.deviceId;
     if (form.valid) {
       this.http.post("SensorDatas/Create", this.sensorDataModel, (res) => {
@@ -111,7 +107,6 @@ export class SensorComponent implements AfterViewInit {
 
   setRoomId(id: string) {
     this.selectedRoomId = id;
-    this.sensorModel.roomId = id;
   }
 
   deleteById() {
@@ -137,6 +132,8 @@ export class SensorComponent implements AfterViewInit {
     })
   }
 
+  
+
   getLightTimeLogDaily() {
     // this.http.get(`LightTimeLogs/GetAllBySensorIdDaily?Id=${this.sensorId}`, (res) => {
     //   this.lightTimeLogs = res.data;
@@ -155,7 +152,7 @@ export class SensorComponent implements AfterViewInit {
         console.log(log.timeCount);
         return [index, log.timeCount]; // X için index, Y için timeCount
       });
-  
+
       const xTicks = this.lightTimeLogs.map((log, index) => {
         const startDate = new Date(log.startDate);
         const formattedStartDate = `${startDate.getHours()}:${startDate.getMinutes().toString().padStart(2, '0')}:${startDate.getSeconds().toString().padStart(2, '0')}`;
@@ -168,7 +165,7 @@ export class SensorComponent implements AfterViewInit {
         return [formattedFinishDate]; // X ekseni için tick
       });
       console.log(xTicks2);
-      
+
       // Grafiği başlat
       this.initializeFlotBarChart2(formattedData, xTicks, xTicks2);
     });
@@ -178,7 +175,7 @@ export class SensorComponent implements AfterViewInit {
     this.http.get(`LightTimeLogs/GetDailyTotalsBySensorIdWeekly?Id=${this.deviceId}`, (res) => {
       const data = res.data;
       console.log(res.data);
-      
+
 
       // data'nın türünü kontrol edelim
       if (!Array.isArray(data)) {
@@ -223,7 +220,6 @@ export class SensorComponent implements AfterViewInit {
   }
 
   ngAfterViewInit(): void {
-    // this.initializeFlotBarChart(formattedData);
     this.LineChart(this.lightTimeLogs);
   }
 
@@ -232,7 +228,7 @@ export class SensorComponent implements AfterViewInit {
       [0, 'P'], [2, 'S'], [4, 'Ç'],
       [6, 'P'], [8, 'C'], [10, 'C'], [12, 'P']
     ];
-  
+
     const options = {
       series: {
         bars: {
@@ -275,36 +271,36 @@ export class SensorComponent implements AfterViewInit {
         }
       }
     };
-  
+
     const plot = $.plot("#flotBar1", [{ data: data }], options);
-  
+
     // Barların üzerine değer yazdırma
     const ctx = plot.getCanvas().getContext("2d");
     const offset = plot.getPlotOffset();
-    
+
     ctx.font = "12px Arial";
     ctx.fillStyle = "#f0a907"; // Yazı rengi
-  
+
     data.forEach(([x, y]: [number, number]) => {
       const pos = plot.p2c({ x, y });
       ctx.fillText(y.toFixed(1), pos.left + offset.left - 10, pos.top + offset.top - 10); // Değerlerin pozisyonunu ayarlayın
     });
   }
-  
-  private initializeFlotBarChart2(data: any[], xTicks: any[], xTicks2:any[]): void {
 
-     // xTicks ve xTicks2'yi birleştirin, xTicks2'yi '-' ekleyerek ekleyin
-     const combinedTicks = [];
-    
-     // xTicks'i ve xTicks2'yi sayısal pozisyonlarla birleştir
-     for (let i = 0; i < xTicks.length; i++) {
-         // xTicks[i] ve xTicks2[i] değerlerini birleştir
-         const tickLabel = xTicks[i] + ' - ' + xTicks2[i];
-         // Sayısal pozisyon (index) ve etiket kombinasyonu ekle
-         combinedTicks.push([i, tickLabel]);  // i sayısal pozisyon, tickLabel etiket
-     }
-     console.log(combinedTicks);
-     
+  private initializeFlotBarChart2(data: any[], xTicks: any[], xTicks2: any[]): void {
+
+    // xTicks ve xTicks2'yi birleştirin, xTicks2'yi '-' ekleyerek ekleyin
+    const combinedTicks = [];
+
+    // xTicks'i ve xTicks2'yi sayısal pozisyonlarla birleştir
+    for (let i = 0; i < xTicks.length; i++) {
+      // xTicks[i] ve xTicks2[i] değerlerini birleştir
+      const tickLabel = xTicks[i] + ' - ' + xTicks2[i];
+      // Sayısal pozisyon (index) ve etiket kombinasyonu ekle
+      combinedTicks.push([i, tickLabel]);  // i sayısal pozisyon, tickLabel etiket
+    }
+    console.log(combinedTicks);
+
     $.plot("#flotBar2", [
       {
         data: data, // Dinamik veri
@@ -321,19 +317,19 @@ export class SensorComponent implements AfterViewInit {
         borderWidth: 1, // Dış çerçeve genişliği
         borderColor: '#ccc', // Dış çerçeve rengi
         tickColor: '#e5e5e5', // Izgara çizgilerinin rengi
-        markings: function (axes:any) { // Ekstra kılavuz çizgileri eklemek için
+        markings: function (axes: any) { // Ekstra kılavuz çizgileri eklemek için
           const markings = [];
           for (let x = Math.ceil(axes.xaxis.min); x < axes.xaxis.max; x++) {
-            markings.push({ xaxis: { from: x, to: x }, color: '#f9f9f9', lineWidth:0.2 });
+            markings.push({ xaxis: { from: x, to: x }, color: '#f9f9f9', lineWidth: 0.2 });
           }
           for (let y = Math.ceil(axes.yaxis.min); y < axes.yaxis.max; y++) {
-            markings.push({ yaxis: { from: y, to: y }, color: '#f9f9f9', lineWidth:0.2 });
+            markings.push({ yaxis: { from: y, to: y }, color: '#f9f9f9', lineWidth: 0.2 });
           }
           return markings;
         },
       },
       yaxis: {
-        tickSize:5,
+        tickSize: 5,
         tickColor: 'transparent',
         font: {
           color: '#f0a907',
@@ -361,7 +357,7 @@ export class SensorComponent implements AfterViewInit {
         const timeInHours = hours + minutes / 60;
         return [timeInHours, log.timeCount as number];
       });
-  
+
     $.plot($('#flotLine1'), [
       {
         data: plotData,
@@ -369,48 +365,48 @@ export class SensorComponent implements AfterViewInit {
         color: '#ffaa2b'
       }
     ],
-    {
-      series: {
-        lines: {
-          show: true,
-          lineWidth: 1
+      {
+        series: {
+          lines: {
+            show: true,
+            lineWidth: 1
+          },
+          shadowSize: 0
         },
-        shadowSize: 0
-      },
-      points: {
-        show: false,
-      },
-      legend: {
-        noColumns: 1,
-        position: 'nw'
-      },
-      grid: {
-        hoverable: true,
-        clickable: true,
-        borderColor: '#ddd',
-        borderWidth: 0,
-        labelMargin: 5,
-        backgroundColor: 'transparent'
-      },
-      yaxis: {
-        min: 0,
-        max: Math.max(...data.map(log => log.timeCount ?? 0)) + 5,
-        color: 'transparent',
-        font: {
-          size: 10,
-          color: '#999'
+        points: {
+          show: false,
+        },
+        legend: {
+          noColumns: 1,
+          position: 'nw'
+        },
+        grid: {
+          hoverable: true,
+          clickable: true,
+          borderColor: '#ddd',
+          borderWidth: 0,
+          labelMargin: 5,
+          backgroundColor: 'transparent'
+        },
+        yaxis: {
+          min: 0,
+          max: Math.max(...data.map(log => log.timeCount ?? 0)) + 5,
+          color: 'transparent',
+          font: {
+            size: 10,
+            color: '#999'
+          }
+        },
+        xaxis: {
+          tickDecimals: 1,
+          tickSize: 1,
+          color: 'transparent',
+          font: {
+            size: 10,
+            color: '#999'
+          }
         }
-      },
-      xaxis: {
-        tickDecimals: 1,
-        tickSize: 1,
-        color: 'transparent',
-        font: {
-          size: 10,
-          color: '#999'
-        }
-      }
-    });
+      });
   }
-  
+
 }

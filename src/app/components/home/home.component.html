@@ -5,15 +5,13 @@
     </ol>
 </div>
 <div class="row">
-
-
     <div class="col-xl-12">
         <div class="card">
             <div class="card-body">
                 <h3>Işıklar ve Röleler</h3>
                 <div class="row">
 
-                    <div *ngFor="let room of rooms;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                    <div *ngFor="let room of lightRooms;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
                         <div class="card overflow-hidden">
                             <div class="social-graph-wrapper widget-facebook">
                                 <span class="s-icon">{{room.roomName}}</span>
@@ -31,7 +29,6 @@
                                                 <p class="m-0">{{ sensor.dataName }}</p>
                                             </div>
                                         </div>
-
                                     }
                                 }
                             </div>
@@ -78,7 +75,7 @@
                 <h3>Termometreler</h3>
                 <div class="row">
 
-                    <div *ngFor="let room of rooms;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
+                    <div *ngFor="let room of tempRooms;" class="col-xl-3 col-xxl-3 col-sm-6 mt-3">
                         <div class="card overflow-hidden">
                             <div class="social-graph-wrapper widget-twitter">
                                 <span class="s-icon">{{room.roomName}}</span>
@@ -86,10 +83,11 @@
                             <div class="row">
                                 @for (device of room.devices; track device) {
                                     @for (sensor of device.sensorDatas; track sensor) {
-                                        <div class="col-12 border-end">
-                                            <div *ngIf="sensor.sensorType?.value === 3" class="pt-3 pb-3 ps-0 pe-0 text-center">
-                                                <h2 class="m-1"><span class="counter">{{ sensor.value }} °C</span></h2>
-                                                <p class="m-0"></p>
+                                        <div *ngIf="sensor.sensorType?.value === 3 || sensor.sensorType?.value === 4" class="col-6 border-end">
+                                            <div class="pt-3 pb-3 ps-0 pe-0 text-center">
+                                                <h2 *ngIf="sensor.sensorType?.value === 3" class="m-1"><span class="counter">{{ sensor.value?.toFixed(2) }} °C</span></h2>
+                                                <h2 *ngIf="sensor.sensorType?.value === 4" class="m-1"><span class="counter">{{ sensor.value }} %</span></h2>
+                                                <p class="m-0">{{sensor.dataName}}</p>
                                             </div>
                                         </div>
                                     }
