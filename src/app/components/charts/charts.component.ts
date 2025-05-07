@@ -8,11 +8,10 @@ import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 
 @Component({
-  selector: 'app-charts',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './charts.component.html',
-  styleUrl: './charts.component.css'
+    selector: 'app-charts',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './charts.component.html',
+    styleUrl: './charts.component.css'
 })
 export class ChartsComponent {
   sensorDataId:string = "";

@@ -10,11 +10,10 @@ import { SignalrService } from '../../services/signalr.service';
 import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
-  selector: 'app-home',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+    selector: 'app-home',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './home.component.html',
+    styleUrl: './home.component.css'
 })
 export class HomeComponent {
   temps: SensorDataModel[] = [];

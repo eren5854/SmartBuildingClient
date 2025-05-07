@@ -9,11 +9,10 @@ import { RemoteControlModel } from '../../models/remote-control.model';
 import { RemoteControlKeyModel } from '../../models/remote-control-key.model';
 
 @Component({
-  selector: 'app-remote-controls',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './remote-controls.component.html',
-  styleUrl: './remote-controls.component.css'
+    selector: 'app-remote-controls',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './remote-controls.component.html',
+    styleUrl: './remote-controls.component.css'
 })
 export class RemoteControlsComponent {
   // remoteControlId:string = "";

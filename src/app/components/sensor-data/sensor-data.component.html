@@ -87,13 +87,19 @@
             </div>
             <div class="card-body">
                 <flexi-grid 
-                [data]="sensorDataModel.sensorDataHistories || []">
+                [data]="sensorDataModel.sensorDataHistories || []"
+                [pageable]="true"
+                themeClass="dark">
+                <flexi-grid-column field="value" title="Deger"></flexi-grid-column>
+                <flexi-grid-column field="value2" title="Deger 2"></flexi-grid-column>
+                <flexi-grid-column field="createdAt" filterType="date" format="dd.MM.yyyy - HH:mm:ss" title="Tarih"></flexi-grid-column>
+
                 </flexi-grid>
             </div>
         </div>
     </div>
 
-    <div class="col-xl-12 col-lg-6 mb-3">
+    <!-- <div class="col-xl-12 col-lg-6 mb-3">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">Sensör kaydı</h4>
@@ -117,6 +123,6 @@
                 </table>
             </div>
         </div>
-    </div>
+    </div> -->
 
 </div>

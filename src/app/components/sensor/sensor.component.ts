@@ -15,11 +15,10 @@ import { SensorDataModel, SensorType } from '../../models/sensor-data.model';
 declare var $: any;
 
 @Component({
-  selector: 'app-sensor',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './sensor.component.html',
-  styleUrls: ['./sensor.component.css']
+    selector: 'app-sensor',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './sensor.component.html',
+    styleUrls: ['./sensor.component.css']
 })
 export class SensorComponent implements AfterViewInit {
   deviceId: string = "";

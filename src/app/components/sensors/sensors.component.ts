@@ -10,11 +10,10 @@ import { RoomModel } from '../../models/room.model';
 import { DeviceModel, DeviceType } from '../../models/device.model';
 
 @Component({
-  selector: 'app-sensors',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './sensors.component.html',
-  styleUrl: './sensors.component.css'
+    selector: 'app-sensors',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './sensors.component.html',
+    styleUrl: './sensors.component.css'
 })
 export class SensorsComponent {
   devices: DeviceModel[] = [];

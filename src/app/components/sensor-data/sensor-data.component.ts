@@ -11,11 +11,10 @@ import {FlexiGridModule} from 'flexi-grid'
 Chart.register(...registerables);
 
 @Component({
-  selector: 'app-sensor-data',
-  standalone: true,
-  imports: [CommonModule, FormsModule, FlexiGridModule],
-  templateUrl: './sensor-data.component.html',
-  styleUrl: './sensor-data.component.css'
+    selector: 'app-sensor-data',
+    imports: [CommonModule, FormsModule, FlexiGridModule],
+    templateUrl: './sensor-data.component.html',
+    styleUrl: './sensor-data.component.css'
 })
 export class SensorDataComponent {
   sensorDataId: string = "";

@@ -7,11 +7,10 @@ import { CommonModule } from '@angular/common';
 import { RemoteControlKeyModel } from '../../models/remote-control-key.model';
 
 @Component({
-  selector: 'app-remote-control',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './remote-control.component.html',
-  styleUrl: './remote-control.component.css'
+    selector: 'app-remote-control',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './remote-control.component.html',
+    styleUrl: './remote-control.component.css'
 })
 export class RemoteControlComponent {
   remoteControlKeyId:string = "";

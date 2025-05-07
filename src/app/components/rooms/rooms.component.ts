@@ -8,11 +8,10 @@ import { CommonModule } from '@angular/common';
 import { RouterLink } from '@angular/router';
 
 @Component({
-  selector: 'app-rooms',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './rooms.component.html',
-  styleUrls: ['./rooms.component.css'] // Düzeltme: styleUrl -> styleUrls
+    selector: 'app-rooms',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './rooms.component.html',
+    styleUrls: ['./rooms.component.css'] // Düzeltme: styleUrl -> styleUrls
 })
 export class RoomsComponent {
   rooms: RoomModel[] = [];

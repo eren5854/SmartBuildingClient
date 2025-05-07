@@ -9,11 +9,10 @@ import * as signalR from '@microsoft/signalr';
 import { SignalrService } from '../../services/signalr.service';
 
 @Component({
-  selector: 'app-layout',
-  standalone: true,
-  imports: [RouterOutlet, RouterLink, CommonModule],
-  templateUrl: './layout.component.html',
-  styleUrl: './layout.component.css'
+    selector: 'app-layout',
+    imports: [RouterOutlet, RouterLink, CommonModule],
+    templateUrl: './layout.component.html',
+    styleUrl: './layout.component.css'
 })
 export class LayoutComponent {
   userName:string="";

@@ -10,11 +10,10 @@ import { SensorModel } from '../../models/sensor.model';
 import { ScenarioModel } from '../../models/scenario.model';
 
 @Component({
-  selector: 'app-scenario',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './scenario.component.html',
-  styleUrl: './scenario.component.css'
+    selector: 'app-scenario',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './scenario.component.html',
+    styleUrl: './scenario.component.css'
 })
 export class ScenarioComponent {
   scenarioId:string = "";

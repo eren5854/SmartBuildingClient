@@ -12,11 +12,10 @@ import { MailSettingModel } from '../../models/mail-setting.model';
 declare var $:any;
 
 @Component({
-  selector: 'app-scenarios',
-  standalone: true,
-  imports: [FormsModule, CommonModule, RouterLink],
-  templateUrl: './scenarios.component.html',
-  styleUrl: './scenarios.component.css'
+    selector: 'app-scenarios',
+    imports: [FormsModule, CommonModule, RouterLink],
+    templateUrl: './scenarios.component.html',
+    styleUrl: './scenarios.component.css'
 })
 export class ScenariosComponent {
   scenarios: ScenarioModel[] = [];

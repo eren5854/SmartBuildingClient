@@ -11,11 +11,10 @@ import { TemplateSettingModel } from '../../models/template-setting.model';
 import { SwalService } from '../../services/swal.service';
 
 @Component({
-  selector: 'app-settings',
-  standalone: true,
-  imports: [FormsModule, CommonModule],
-  templateUrl: './settings.component.html',
-  styleUrl: './settings.component.css'
+    selector: 'app-settings',
+    imports: [FormsModule, CommonModule],
+    templateUrl: './settings.component.html',
+    styleUrl: './settings.component.css'
 })
 export class SettingsComponent {
   userModel: UserModel = new UserModel();
