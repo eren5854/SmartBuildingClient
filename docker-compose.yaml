@@ -5,7 +5,7 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: smart-home-client
-    container_name: SmartHomeClient
+    image: smart-building-client
+    container_name: SmartBuildingClient
     ports:
-      - 54015:80
+      - 54085:80
