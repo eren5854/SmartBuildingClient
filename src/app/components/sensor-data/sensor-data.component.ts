@@ -7,12 +7,13 @@ import { HttpService } from '../../services/http.service';
 import { SwalService } from '../../services/swal.service';
 import { Chart, registerables } from 'chart.js'
 import { config } from 'rxjs';
+import {FlexiGridModule} from 'flexi-grid'
 Chart.register(...registerables);
 
 @Component({
   selector: 'app-sensor-data',
   standalone: true,
-  imports: [CommonModule, FormsModule, RouterLink],
+  imports: [CommonModule, FormsModule, FlexiGridModule],
   templateUrl: './sensor-data.component.html',
   styleUrl: './sensor-data.component.css'
 })

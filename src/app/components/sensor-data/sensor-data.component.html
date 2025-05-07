@@ -9,9 +9,8 @@
                                 type="text" class="form-control input-default " placeholder="Sensör İsmi">
                         </div>
                         <div class="mb-3">
-                            <input [(ngModel)]="sensorDataModel.pinNumber" id="pinNumber"
-                                name="pinNumber" type="number" class="form-control input-default "
-                                placeholder="Sensör pin numarası">
+                            <input [(ngModel)]="sensorDataModel.pinNumber" id="pinNumber" name="pinNumber" type="number"
+                                class="form-control input-default " placeholder="Sensör pin numarası">
                         </div>
                         <div class="mb-3">
                             <select class="form-select" style="background-color: #262626; color: #fff;"
@@ -36,8 +35,8 @@
 
                 <div class="basic-form">
                     <div class="mb-3">
-                        <input [(ngModel)]="sensorDataModel.value" id="value" name="value" required
-                            type="number" class="form-control input-default">
+                        <input [(ngModel)]="sensorDataModel.value" id="value" name="value" required type="number"
+                            class="form-control input-default">
                     </div>
                     <div class="mb-3">
                         <input [(ngModel)]="sensorDataModel.value2" id="value2" name="value2" type="text"
@@ -87,6 +86,19 @@
                 <h4 class="card-title">Sensör kaydı</h4>
             </div>
             <div class="card-body">
+                <flexi-grid 
+                [data]="sensorDataModel.sensorDataHistories || []">
+                </flexi-grid>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-xl-12 col-lg-6 mb-3">
+        <div class="card">
+            <div class="card-header">
+                <h4 class="card-title">Sensör kaydı</h4>
+            </div>
+            <div class="card-body">
                 <table class="table">
                     <thead class="thead-dark">
                         <tr>
@@ -106,38 +118,5 @@
             </div>
         </div>
     </div>
-
-    <!-- <div class="col-xl-12 col-lg-6 mb-3">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Günlük Kullanım</h4>
-            </div>
-            <div class="card-body">
-                <div id="flotBar2" class="flot-chart"></div>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-xl-6 col-lg-6 mb-3">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Haftalık Kullanım(Dakika)</h4>
-            </div>
-            <div class="card-body">
-                <div id="flotBar1" class="flot-chart"></div>
-            </div>
-        </div>
-    </div>
-
-    <div *ngIf="sensorModel.sensorType === 1" class="col-lg-6 col-sm-6">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title"></h4>
-            </div>
-            <div class="card-body">
-                <div id="flotLine1" class="flot-chart"></div>
-            </div>
-        </div>
-    </div> -->
 
 </div>
