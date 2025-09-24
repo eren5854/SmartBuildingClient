@@ -11,7 +11,8 @@ export class SignalrService {
 
   startConnection(callback: () => void) {
     this.hub = new signalR.HubConnectionBuilder()
-      .withUrl('https://apismartbuilding.erendelibas.xyz/sensor-hub', {
+      // .withUrl('https://apismartbuilding.erendelibas.xyz/sensor-hub', {
+      .withUrl('https://192.168.68.134:45455/sensor-hub', {
         withCredentials: true
       })
       .withAutomaticReconnect()
