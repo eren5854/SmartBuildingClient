@@ -13,7 +13,7 @@ export class SignalrService {
     this.hub = new signalR.HubConnectionBuilder()
       // .withUrl('https://apismartbuilding.erendelibas.xyz/sensor-hub', {
       // .withUrl('https://192.168.68.134:45455/sensor-hub', {
-      .withUrl('http://100.127.177.109:54080/sensor-hub', {
+      .withUrl('http://188.132.232.172:54080/sensor-hub', {
         withCredentials: true
       })
       .withAutomaticReconnect()
