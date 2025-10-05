@@ -19,7 +19,7 @@ export class LoginComponent {
 
   // url:string = "https://apismartbuilding.erendelibas.xyz/api";
   // url:string = "http://188.132.232.172:54080/api";
-  url:string = "http://localhost:54081/api/"
+  url:string = "http://localhost:54081/api"
   // url:string = "http://100.127.177.109:54080/api";
 
   constructor(
