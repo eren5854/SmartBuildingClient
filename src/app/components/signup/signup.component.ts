@@ -23,7 +23,7 @@ export class SignupComponent {
 
   signup(form:NgForm){
     if (form.valid) {
-      this.http.post("https://192.168.1.101:45455/api/Auth/Signup", this.userModel)
+      this.http.post("http://188.132.232.172:54080/api/Auth/Register", this.userModel)
       .subscribe({
         next: (res:any) => {
           console.log(res.data);
