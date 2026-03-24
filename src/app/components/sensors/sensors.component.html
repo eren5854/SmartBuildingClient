@@ -91,19 +91,32 @@
                         <div class="media">
                             <span class="me-3">
                                 <i *ngIf="sensorData.sensorType?.name === 'Light'" class="fa-solid fa-lightbulb"></i>
-                                <i *ngIf="sensorData.sensorType?.name === 'Temperature'"
-                                    class="fa-solid fa-temperature-three-quarters"></i>
-                                <i *ngIf="sensorData.sensorType?.name === 'Humidity'"
-                                    class="fa-solid fa-percent"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'Temperature'" class="fa-solid fa-temperature-three-quarters"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'Humidity'" class="fa-solid fa-percent"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'LDR'" class="fa-solid fa-sun"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'Motion'" class="fa-solid fa-person-running"></i>
+                                <i *ngIf="sensorData.sensorType?.name === 'Relay'" class="fa-solid fa-toggle-on"></i>
                             </span>
                             <div class="media-body text-white text-end">
                                 <p class="mb-1">{{sensorData.dataName}}</p>
-                                <h3 *ngIf="sensorData.sensorType?.name === 'Relay' || sensorData.sensorType?.name === 'Light'" class="text-white">{{
-                                    sensorData.value
-                                    === 1 ? 'On' : 'Off' }}</h3>
-                                <h3 *ngIf="sensorData.sensorType?.name !== 'Relay' && sensorData.sensorType?.name !== 'Light'" class="text-white">
-                                    {{sensorData.value?.toFixed(2)}}</h3>
+                                
+                                <h3 *ngIf="sensorData.sensorType?.name === 'Relay' || sensorData.sensorType?.name === 'Light'" class="text-white">
+                                    {{ sensorData.value === 1 ? 'On' : 'Off' }}
+                                </h3>
+                                
+                                <h3 *ngIf="sensorData.sensorType?.name === 'Motion'" class="text-white" [ngStyle]="{'color': sensorData.value === 1 ? 'red' : 'white'}">
+                                    {{ sensorData.value === 1 ? 'Hareket Var' : 'Sakin' }}
+                                </h3>
 
+                                <h3 *ngIf="sensorData.sensorType?.name === 'LDR'" class="text-white">
+                                    {{ sensorData.value }} Lux
+                                </h3>
+
+                                <h3 *ngIf="sensorData.sensorType?.name !== 'Relay' && sensorData.sensorType?.name !== 'Light' && sensorData.sensorType?.name !== 'Motion' && sensorData.sensorType?.name !== 'LDR'" class="text-white">
+                                    {{sensorData.value?.toFixed(2)}}
+                                    <span *ngIf="sensorData.sensorType?.name === 'Temperature'"> °C</span>
+                                    <span *ngIf="sensorData.sensorType?.name === 'Humidity'"> %</span>
+                                </h3>
                             </div>
                         </div>
                     </div>
