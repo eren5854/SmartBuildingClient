@@ -47,7 +47,35 @@
         </div>
     </div>
 
-    <div class="col-xl-12 col-lg-6 mb-3">
+    <div class="row mb-3">
+        <div class="col-md-4">
+            <label>Başlangıç Tarihi</label>
+            <input type="datetime-local" class="form-control" [(ngModel)]="filterStartDate">
+        </div>
+        <div class="col-md-4">
+            <label>Bitiş Tarihi</label>
+            <input type="datetime-local" class="form-control" [(ngModel)]="filterEndDate">
+        </div>
+        <div class="col-md-4 d-flex align-items-end">
+            <button class="btn btn-primary w-100" (click)="getFromDate()">Filtrele ve Getir</button>
+        </div>
+    </div>
+
+    <div class="card mt-4">
+        <div class="card-header">Filtrelenmiş Tarih Aralığı Grafiği</div>
+        <div class="card-body">
+            <canvas id="MyFilteredChart"></canvas>
+        </div>
+    </div>
+
+    <div>
+        <canvas id="MyChart"></canvas>
+    </div>
+    <div>
+        <canvas id="MyWeekChart"></canvas>
+    </div>
+
+    <!-- <div class="col-xl-12 col-lg-6 mb-3">
         <div class="card">
             <div class="card-header">
                 <h4 class="card-title">{{sensorDataModel.dataName}} grafiği</h4>
@@ -78,56 +106,16 @@
                 <canvas id="MyWeekChart"></canvas>
             </div>
         </div>
-    </div>
+    </div> -->
 
     <div class="card-body">
-        <flexi-grid 
-        [data]="sensorDataModel.sensorDataHistories || []"
-        [pageable]="true"
-        themeClass="dark"
-        [sortable]="true"
-        [filterable]="true"
-        [draggable]="true"
-        [showCaption]="true"
-        captionTitle="Sensor Kaydı">
-        <flexi-grid-column field="createdAt" filterType="date" format="dd.MM.yyyy - HH:mm:ss" title="Tarih"></flexi-grid-column>
-        <flexi-grid-column field="value" title="Deger"></flexi-grid-column>
-        <flexi-grid-column field="value2" title="Deger 2"></flexi-grid-column>
+        <flexi-grid [data]="sensorDataModel.sensorDataHistories || []" [pageable]="true" themeClass="dark"
+            [sortable]="true" [filterable]="true" [draggable]="true" [showCaption]="true" captionTitle="Sensor Kaydı">
+            <flexi-grid-column field="createdAt" filterType="date" format="dd.MM.yyyy - HH:mm:ss"
+                title="Tarih"></flexi-grid-column>
+            <flexi-grid-column field="value" title="Deger"></flexi-grid-column>
+            <flexi-grid-column field="value2" title="Deger 2"></flexi-grid-column>
 
         </flexi-grid>
     </div>
-    <!-- <div class="col-xl-12 col-lg-6 mb-3">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Sensör kaydı</h4>
-            </div>
-        </div>
-    </div> -->
-
-    <!-- <div class="col-xl-12 col-lg-6 mb-3">
-        <div class="card">
-            <div class="card-header">
-                <h4 class="card-title">Sensör kaydı</h4>
-            </div>
-            <div class="card-body">
-                <table class="table">
-                    <thead class="thead-dark">
-                        <tr>
-                            <th scope="col">Değer1</th>
-                            <th scope="col">Değer2</th>
-                            <th scope="col">Tarih</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <tr *ngFor="let log of sensorDataModelSort.sensorDataHistories">
-                            <th scope="row">{{log.value?.toFixed(2)}}</th>
-                            <td>{{log.value2}}</td>
-                            <td>{{log.createdAt | date: "dd/MM/yyyy - HH:mm:ss"}}</td>
-                        </tr>
-                    </tbody>
-                </table>
-            </div>
-        </div>
-    </div> -->
-
 </div>
