@@ -7,5 +7,6 @@ services:
       dockerfile: Dockerfile
     image: smart-building-client
     container_name: SmartBuildingClient
+    restart: unless-stopped
     ports:
       - 54085:80
